@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Detail</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .detail-container { max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 24px; border-radius: 8px; }
+        .product-title { font-size: 2em; margin-bottom: 16px; }
+        .product-info { margin-bottom: 12px; }
+        .product-description { color: #555; }
+    </style>
+</head>
+<body>
+    <div class="detail-container">
+        <div class="product-title">{{ product.name }}</div>
+        <div class="product-info">
+            <strong>Price:</strong> ${{ product.price }}
+        </div>
+        <div class="product-info">
