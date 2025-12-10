@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Product Detail</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        .detail-container { max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 24px; border-radius: 8px; }
-        .product-title { font-size: 2em; margin-bottom: 16px; }
-        .product-info { margin-bottom: 12px; }
-        .product-description { color: #555; }
-    </style>
-</head>
-<body>
-    <div class="detail-container">
-        <div class="product-title">{{ product.name }}</div>
-        <div class="product-info">
-            <strong>Price:</strong> ${{ product.price }}
-        </div>
-        <div class="product-info">
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="car-detail max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-8 mt-8">
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">{{ car.name }}</h1>
+    <ul class="space-y-4 mb-6">
+        <li><span class="font-semibold text-gray-700">Brand:</span> <span class="text-gray-900">{{ car.brand }}</span></li>
+        <li><span class="font-semibold text-gray-700">Model:</span> <span class="text-gray-900">{{ car.model }}</span></li>
+        <li><span class="font-semibold text-gray-700">Year:</span> <span class="text-gray-900">{{ car.year }}</span></li>
+        <li><span class="font-semibold text-gray-700">Price:</span> <span class="text-green-600 font-bold">${{ car.price }}</span></li>
+    </ul>
+</div>
+{% endblock %}

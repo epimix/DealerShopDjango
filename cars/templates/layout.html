@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-blue-600">CarsApp</a>
+            <ul class="flex space-x-6">
+                <li><a href="/cars/list" class="text-gray-700 hover:text-blue-600">Home</a></li>
+                <li><a href="#" class="text-gray-700 hover:text-blue-600">Cars</a></li>
+                <li><a href="#" class="text-gray-700 hover:text-blue-600">About</a></li>
+                <li><a href="#" class="text-gray-700 hover:text-blue-600">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        {% block content %}
+        <!-- Page content goes here -->
+        {% endblock %}
+    </main>
+</body>
+</html>
