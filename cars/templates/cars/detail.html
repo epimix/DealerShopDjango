@@ -2,12 +2,16 @@
 
 {% block content %}
 <div class="car-detail max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-8 mt-8">
-    <h1 class="text-3xl font-bold mb-6 text-gray-800">{{ car.name }}</h1>
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">{{ car.year }} {{ car.brand }} {{ car.model }}</h1>
     <ul class="space-y-4 mb-6">
         <li><span class="font-semibold text-gray-700">Brand:</span> <span class="text-gray-900">{{ car.brand }}</span></li>
         <li><span class="font-semibold text-gray-700">Model:</span> <span class="text-gray-900">{{ car.model }}</span></li>
         <li><span class="font-semibold text-gray-700">Year:</span> <span class="text-gray-900">{{ car.year }}</span></li>
+        <li><span class="font-semibold text-gray-700">Type:</span> <span class="text-gray-900">{{ car.get_type_display }}</span></li>
         <li><span class="font-semibold text-gray-700">Price:</span> <span class="text-green-600 font-bold">${{ car.price }}</span></li>
     </ul>
+    <div class="mt-6">
+        <a href="/cars/list" class="text-blue-600 hover:text-blue-800">← Back to list</a>
+    </div>
 </div>
 {% endblock %}

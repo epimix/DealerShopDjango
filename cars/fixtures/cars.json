@@ -1,0 +1,57 @@
+[
+    {
+        "model": "cars.car",
+        "pk": 1,
+        "fields": {
+            "brand": "Toyota",
+            "model": "Camry",
+            "year": 2020,
+            "type": "SEDAN",
+            "price": "24000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 2,
+        "fields": {
+            "brand": "Honda",
+            "model": "Accord",
+            "year": 2019,
+            "type": "SEDAN",
+            "price": "22000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 3,
+        "fields": {
+            "brand": "Ford",
+            "model": "Mustang",
+            "year": 2021,
+            "type": "COUPE",
+            "price": "26000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 4,
+        "fields": {
+            "brand": "Chevrolet",
+            "model": "Malibu",
+            "year": 2018,
+            "type": "SEDAN",
+            "price": "21000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 5,
+        "fields": {
+            "brand": "Nissan",
+            "model": "Altima",
+            "year": 2022,
+            "type": "SEDAN",
+            "price": "25000.00"
+        }
+    }
+]

@@ -1,19 +1,40 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from cars.forms import CarForm
+from cars.models import Car
 
 
-cars = [
-    {"id": 1, "brand": "Toyota", "model": "Camry", "year": 2020, "price": 24000},
-    {"id": 2, "brand": "Honda", "model": "Accord", "year": 2019, "price": 22000},
-    {"id": 3, "brand": "Ford", "model": "Mustang", "year": 2021, "price": 26000},
-    {"id": 4, "brand": "Chevrolet", "model": "Malibu", "year": 2018, "price": 21000},
-    {"id": 5, "brand": "Nissan", "model": "Altima", "year": 2022, "price": 25000},
-]
+# cars = [
+#     {"id": 1, "brand": "Toyota", "model": "Camry", "year": 2020, "price": 24000},
+#     {"id": 2, "brand": "Honda", "model": "Accord", "year": 2019, "price": 22000},
+#     {"id": 3, "brand": "Ford", "model": "Mustang", "year": 2021, "price": 26000},
+#     {"id": 4, "brand": "Chevrolet", "model": "Malibu", "year": 2018, "price": 21000},
+#     {"id": 5, "brand": "Nissan", "model": "Altima", "year": 2022, "price": 25000},
+# ]
 
 def carsList(request):
-    return render(request, "cars/list.html",{"cars": cars})
+    cars = Car.objects.all()
+    return render(request, "cars/list.html", {"cars": cars})
+
 
 def carDetail(request, car_id):
-    return render(request, "cars/detail.html", {"car": cars[car_id - 1]})
+    car = get_object_or_404(Car, id=car_id)
+    return render(request, "cars/detail.html", {"car": car})
 
 
+def deleteCar(request, car_id):
+    car = get_object_or_404(Car, id=car_id)
+    car.delete()
+    return redirect("/cars/list")
+
+
+def createCar(request):
+    if request.method == "POST":
+        form = CarForm(request.POST)
+        if form.is_valid():
+            car = form.save()
+            return redirect(reverse("car_detail", args=[car.id]))
+    else:
+        form = CarForm()
+
+    return render(request, "cars/create.html", {"form": form})
