@@ -30,7 +30,7 @@ def deleteCar(request, car_id):
 
 def createCar(request):
     if request.method == "POST":
-        form = CarForm(request.POST)
+        form = CarForm(request.POST, request.FILES)
         if form.is_valid():
             car = form.save()
             return redirect(reverse("car_detail", args=[car.id]))
@@ -38,3 +38,16 @@ def createCar(request):
         form = CarForm()
 
     return render(request, "cars/create.html", {"form": form})
+
+def editCar(request, car_id):
+    car = get_object_or_404(Car, id=car_id)
+
+    if request.method == "POST":
+        form = CarForm(request.POST, request.FILES, instance=car)
+        if form.is_valid():
+            car = form.save()
+            return redirect(reverse("car_detail", args=[car.id]))
+    else:
+        form = CarForm(instance=car)
+
+    return render(request, "cars/edit.html", {"form": form, "car": car})

@@ -7,13 +7,13 @@ from cars.models import Car
 class CarForm(ModelForm):
     class Meta:
         model = Car
-        fields = ["brand", "model", "year", "type", "price"]
+        fields = ["brand", "model", "year", "type", "price","photo"]
         widgets = {
             'year': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter year'}),
             "type": forms.Select(attrs={'class': 'form-select'}),
             "brand": forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter brand name'}),
             "model": forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter model name'}),
             "price": forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter price'}),
-            
+            "photo": forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
     
