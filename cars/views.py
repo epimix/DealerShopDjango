@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from cars.forms import CarForm
 from cars.models import Car
-
+from django.contrib import messages
 
 # cars = [
 #     {"id": 1, "brand": "Toyota", "model": "Camry", "year": 2020, "price": 24000},
@@ -14,6 +14,7 @@ from cars.models import Car
 
 def carsList(request):
     cars = Car.objects.all()
+    messages.success(request, "Cars fetched successfully")
     return render(request, "cars/list.html", {"cars": cars})
 
 
@@ -24,7 +25,8 @@ def carDetail(request, car_id):
 
 def deleteCar(request, car_id):
     car = get_object_or_404(Car, id=car_id)
-    car.delete()
+    car.delete()    
+    messages.success(request, "Car deleted successfully")
     return redirect("/cars/list")
 
 
@@ -33,6 +35,7 @@ def createCar(request):
         form = CarForm(request.POST, request.FILES)
         if form.is_valid():
             car = form.save()
+            messages.success(request, "Car created successfully")
             return redirect(reverse("car_detail", args=[car.id]))
     else:
         form = CarForm()
@@ -46,6 +49,7 @@ def editCar(request, car_id):
         form = CarForm(request.POST, request.FILES, instance=car)
         if form.is_valid():
             car = form.save()
+            messages.success(request, "Car updated successfully")
             return redirect(reverse("car_detail", args=[car.id]))
     else:
         form = CarForm(instance=car)

@@ -1,17 +1,69 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="car-detail max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-8 mt-8">
-    <h1 class="text-3xl font-bold mb-6 text-gray-800">{{ car.year }} {{ car.brand }} {{ car.model }}</h1>
-    <ul class="space-y-4 mb-6">
-        <li><span class="font-semibold text-gray-700">Brand:</span> <span class="text-gray-900">{{ car.brand }}</span></li>
-        <li><span class="font-semibold text-gray-700">Model:</span> <span class="text-gray-900">{{ car.model }}</span></li>
-        <li><span class="font-semibold text-gray-700">Year:</span> <span class="text-gray-900">{{ car.year }}</span></li>
-        <li><span class="font-semibold text-gray-700">Type:</span> <span class="text-gray-900">{{ car.get_type_display }}</span></li>
-        <li><span class="font-semibold text-gray-700">Price:</span> <span class="text-green-600 font-bold">${{ car.price }}</span></li>
-    </ul>
-    <div class="mt-6">
-        <a href="/cars/list" class="text-blue-600 hover:text-blue-800">← Back to list</a>
+<div class="flex items-start justify-between gap-4 mb-6">
+    <div>
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+            {{ car.year }} {{ car.brand }} {{ car.model }}
+        </h1>
+        <p class="mt-1 text-sm text-slate-600">Car details</p>
+    </div>
+    <a href="/cars/list"
+        class="inline-flex items-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-2.5 text-sm font-semibold text-blue-700 hover:bg-blue-100">
+        <span class="text-base leading-none">←</span>
+        Back to list
+    </a>
+</div>
+
+<div class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-0">
+        <div class="md:col-span-2 bg-slate-50 border-b md:border-b-0 md:border-r border-slate-200 p-4 sm:p-6">
+            {% if car.photo %}
+            <img src="{{ car.photo.url }}" alt="{{ car.model }}"
+                class="w-full h-72 md:h-80 rounded-xl object-cover border border-slate-200 bg-white">
+            {% else %}
+            <div
+                class="w-full h-72 md:h-80 rounded-xl bg-white border border-slate-200 flex items-center justify-center">
+                <div class="text-slate-500 text-sm">No photo</div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="md:col-span-3 p-4 sm:p-6">
+            <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
+                    <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Brand</dt>
+                    <dd class="mt-1 text-sm font-semibold text-slate-900">{{ car.brand }}</dd>
+                </div>
+                <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
+                    <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Model</dt>
+                    <dd class="mt-1 text-sm font-semibold text-slate-900">{{ car.model }}</dd>
+                </div>
+                <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
+                    <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Year</dt>
+                    <dd class="mt-1 text-sm font-semibold text-slate-900">{{ car.year }}</dd>
+                </div>
+                <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
+                    <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Type</dt>
+                    <dd class="mt-1 text-sm font-semibold text-slate-900">{{ car.get_type_display }}</dd>
+                </div>
+                <div class="sm:col-span-2 rounded-xl bg-slate-50 border border-slate-200 p-4">
+                    <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Price</dt>
+                    <dd class="mt-1 text-lg font-bold text-slate-900">${{ car.price }}</dd>
+                </div>
+            </dl>
+
+            <div class="mt-6 flex items-center justify-end gap-2">
+                <a href="/cars/edit/{{ car.id }}/"
+                    class="inline-flex items-center rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                    Edit
+                </a>
+                <a href="/cars/delete/{{ car.id }}/"
+                    class="inline-flex items-center rounded-lg border border-red-200 bg-white px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-50"
+                    onclick="return confirm('Delete this car?');">
+                    Delete
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

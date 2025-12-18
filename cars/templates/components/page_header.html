@@ -1,0 +1,16 @@
+<div class="flex items-start justify-between gap-4 mb-6">
+    <div>
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">{{ title }}</h1>
+        {% if subtitle %}
+        <p class="mt-1 text-sm text-slate-600">{{ subtitle }}</p>
+        {% endif %}
+    </div>
+
+    {% if back_href %}
+    <a href="{{ back_href }}"
+        class="inline-flex items-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-2.5 text-sm font-semibold text-blue-700 hover:bg-blue-100">
+        <span class="text-base leading-none">←</span>
+        {{ back_label|default:"Back" }}
+    </a>
+    {% endif %}
+</div>

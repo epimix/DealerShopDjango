@@ -1,33 +1,8 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="max-w-xl mx-auto bg-white shadow-lg rounded-lg p-8 mt-8">
-    <h1 class="text-3xl font-bold mb-6 text-gray-800">Edit Car</h1>
-
-    <form method="post" enctype="multipart/form-data" class="space-y-4">
-        {% csrf_token %}
-
-        {{ form.non_field_errors }}
-
-        {% for field in form %}
-        <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ field.label }}
-            </label>
-            {{ field }}
-            {% if field.errors %}
-            <p class="text-red-600 text-sm mt-1">{{ field.errors|striptags }}</p>
-            {% endif %}
-        </div>
-        {% endfor %}
-
-        <div class="flex items-center justify-between mt-6">
-            <a href="/cars/list" class="text-gray-600 hover:text-gray-800">Cancel</a>
-            <button type="submit"
-                class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
-                Save
-            </button>
-        </div>
-    </form>
+<div class="max-w-2xl mx-auto">
+    {% include "components/page_header.html" with title="Edit car" back_href="/cars/"|add:car.id|add:"/" back_label="Back" %}
+    {% include "components/car_form.html" with form=form cancel_href="/cars/"|add:car.id|add:"/" cancel_label="Cancel" submit_label="Save changes" %}
 </div>
 {% endblock %}
