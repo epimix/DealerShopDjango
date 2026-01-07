@@ -6,6 +6,9 @@
     <title>Cars App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script
+    src="https://kit.fontawesome.com/665c3db5a0.js"
+    crossorigin="anonymous"></script>
 </head>
 
 <body class="bg-slate-50 text-slate-900">
@@ -19,10 +22,10 @@
                 <div class="flex items-center gap-2">
                     <a href="/"
                         class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100">Home</a>
-                    <a href="/cars/list"
+                    <a href="/cars/"
                         class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100">Cars</a>
-
-                    </a>
+                    <a href="/favorites/"
+                        class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100">Favorites</a>
                 </div>
             </div>
         </div>
@@ -32,7 +35,7 @@
         {% include "components/toast.html" %}
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {% block content %}{% endblock %}
     </main>
     {% block scripts %}{% endblock %}

@@ -12,6 +12,13 @@ from django.contrib import messages
 #     {"id": 5, "brand": "Nissan", "model": "Altima", "year": 2022, "price": 25000},
 # ]
 
+from favorites.favorites import get_count_of_favorites_cars, get_favorites_cars
+
+
+def car_index(request):
+    cars = Car.objects.all()
+    return render(request, "cars/index.html", {"cars": cars, "fav_count": get_count_of_favorites_cars(request), "fav_cars": get_favorites_cars(request)})
+
 def carsList(request):
     cars = Car.objects.all()
     messages.success(request, "Cars fetched successfully")
@@ -20,7 +27,8 @@ def carsList(request):
 
 def carDetail(request, car_id):
     car = get_object_or_404(Car, id=car_id)
-    return render(request, "cars/detail.html", {"car": car})
+    fav_cars = get_favorites_cars(request)
+    return render(request, "cars/detail.html", {"car": car, "fav_cars": fav_cars})
 
 
 def deleteCar(request, car_id):

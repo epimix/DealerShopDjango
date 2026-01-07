@@ -53,5 +53,148 @@
             "type": "SEDAN",
             "price": "25000.00"
         }
+    },
+    {
+        "model": "cars.car",
+        "pk": 6,
+        "fields": {
+            "brand": "BMW",
+            "model": "X5",
+            "year": 2023,
+            "type": "SUV",
+            "price": "30000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 7,
+        "fields": {
+            "brand": "Audi",
+            "model": "A4",
+            "year": 2022,
+            "type": "SEDAN",
+            "price": "29000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 8,
+        "fields": {
+            "brand": "Porsche",
+            "model": "911",
+            "year": 2023,
+            "type": "COUPE",
+            "price": "125000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 9,
+        "fields": {
+            "brand": "Ferrari",
+            "model": "488 GTB",
+            "year": 2022,
+            "type": "COUPE",
+            "price": "280000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 10,
+        "fields": {
+            "brand": "Lamborghini",
+            "model": "Huracán",
+            "year": 2023,
+            "type": "COUPE",
+            "price": "220000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 11,
+        "fields": {
+            "brand": "Chevrolet",
+            "model": "Corvette",
+            "year": 2023,
+            "type": "COUPE",
+            "price": "65000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 12,
+        "fields": {
+            "brand": "Dodge",
+            "model": "Challenger",
+            "year": 2023,
+            "type": "COUPE",
+            "price": "35000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 13,
+        "fields": {
+            "brand": "Nissan",
+            "model": "GT-R",
+            "year": 2022,
+            "type": "COUPE",
+            "price": "115000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 14,
+        "fields": {
+            "brand": "Audi",
+            "model": "R8",
+            "year": 2023,
+            "type": "COUPE",
+            "price": "145000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 15,
+        "fields": {
+            "brand": "BMW",
+            "model": "M4",
+            "year": 2023,
+            "type": "COUPE",
+            "price": "75000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 16,
+        "fields": {
+            "brand": "Mercedes-Benz",
+            "model": "AMG GT",
+            "year": 2023,
+            "type": "COUPE",
+            "price": "130000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 17,
+        "fields": {
+            "brand": "McLaren",
+            "model": "720S",
+            "year": 2022,
+            "type": "COUPE",
+            "price": "300000.00"
+        }
+    },
+    {
+        "model": "cars.car",
+        "pk": 18,
+        "fields": {
+            "brand": "Aston Martin",
+            "model": "Vantage",
+            "year": 2023,
+            "type": "COUPE",
+            "price": "150000.00"
+        }
     }
 ]

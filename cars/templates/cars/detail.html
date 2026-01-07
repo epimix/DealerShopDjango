@@ -52,16 +52,33 @@
                 </div>
             </dl>
 
-            <div class="mt-6 flex items-center justify-end gap-2">
-                <a href="/cars/edit/{{ car.id }}/"
-                    class="inline-flex items-center rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
-                    Edit
-                </a>
-                <a href="/cars/delete/{{ car.id }}/"
-                    class="inline-flex items-center rounded-lg border border-red-200 bg-white px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-50"
-                    onclick="return confirm('Delete this car?');">
-                    Delete
-                </a>
+            <div class="mt-6 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    {% if car.id in fav_cars %}
+                    <a href="{% url 'favorites:remove_car' car.id 'car_detail' %}" 
+                        class="inline-flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm font-semibold text-red-700 hover:bg-red-100 transition-colors">
+                        <i class="fas fa-heart"></i>
+                        Remove from Favorites
+                    </a>
+                    {% else %}
+                    <a href="{% url 'favorites:add_car' car.id 'car_detail' %}" 
+                        class="inline-flex items-center gap-2 rounded-lg border border-red-200 bg-white px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 transition-colors">
+                        <i class="far fa-heart"></i>
+                        Add to Favorites
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="flex items-center gap-2">
+                    <a href="/cars/edit/{{ car.id }}/"
+                        class="inline-flex items-center rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                        Edit
+                    </a>
+                    <a href="/cars/delete/{{ car.id }}/"
+                        class="inline-flex items-center rounded-lg border border-red-200 bg-white px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-50"
+                        onclick="return confirm('Delete this car?');">
+                        Delete
+                    </a>
+                </div>
             </div>
         </div>
     </div>
