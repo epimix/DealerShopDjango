@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'services',
     'favorites',
     'home',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -39,6 +40,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'favorites.middleware.FavoritesMiddleware',
 ]
 
 ROOT_URLCONF = 'DealerShop.urls'
@@ -53,6 +55,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'favorites.context_processor.favorites_cars_count',
             ],
         },
     },
@@ -115,3 +118,36 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATIC_LOCATION = "static"
 MEDIA_LOCATION = "media"
+
+AZURE_CONTAINER_STATIC = "static"
+AZURE_CONTAINER_MEDIA = "media"
+
+AZURE_ACCOUNT_NAME = "maksstoragedj"
+AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
+STATIC_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER_STATIC}/"
+MEDIA_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER_MEDIA}/"
+
+# ----
+AZURE_ACCOUNT_KEY = "nuh9R8GaUG9Oi7/NxUc0xhHIplyUQVFAaN6fIxfl/LgQVSwG80rOI5Zv98i2W3UpnCjwsqcCM4Gi+AStIwglxg=="
+AZURE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=maksstoragedj;AccountKey=nuh9R8GaUG9Oi7/NxUc0xhHIplyUQVFAaN6fIxfl/LgQVSwG80rOI5Zv98i2W3UpnCjwsqcCM4Gi+AStIwglxg==;EndpointSuffix=core.windows.net"
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.azure_storage.AzureStorage",
+        "OPTIONS": {
+            "azure_container": AZURE_CONTAINER_MEDIA,
+            "account_name": AZURE_ACCOUNT_NAME,
+            "account_key": AZURE_ACCOUNT_KEY,
+            "connection_string": AZURE_CONNECTION_STRING,
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.azure_storage.AzureStorage",
+        "OPTIONS": {
+            "azure_container": AZURE_CONTAINER_STATIC,
+            "account_name": AZURE_ACCOUNT_NAME,
+            "account_key": AZURE_ACCOUNT_KEY,
+            "connection_string": AZURE_CONNECTION_STRING,
+        },
+    },
+}
