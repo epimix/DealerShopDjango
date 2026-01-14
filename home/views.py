@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from cars.models import Car
 from favorites.favorites import get_favorites_cars
 from django.shortcuts import redirect,render
@@ -13,11 +13,10 @@ def home(request):
 
 
 
-def buy_service(request):
+def buy_service(request, car_id):
+    car = get_object_or_404(Car, id=car_id)
     BuyingRequest.objects.create(
-        car_id=Car.objects.first().id,
-        customer_name="John Doe",
-        customer_phone="123-456-7890",
-        message="I'm interested in buying this car."
+        car=car,
+        customer_name="customer"
     )
     return redirect('home')

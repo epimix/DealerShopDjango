@@ -21,9 +21,7 @@ class Car(models.Model):
 
 class BuyingRequest(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='buying_requests')
-    customer_name = models.CharField(max_length=100)
-    customer_phone = models.CharField(max_length=20)
-    message = models.TextField(blank=True)
+    customer_name = models.CharField(max_length=100)    
 
     def __str__(self):
         return f"Buying Request for {self.car} by {self.customer_name}"

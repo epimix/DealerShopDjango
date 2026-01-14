@@ -171,7 +171,7 @@
 {% endif %}
 
 {% if buying_requests %}
-<h2>Current Buyings</h2>
+<h2 class="text-lg font-bold text-slate-900">Current Buyings</h2>
 <ul>
   {% for request in buying_requests %}
   <li>{{ request.customer_name }} has requested to buy {{ request.car }}.</li>
@@ -181,7 +181,6 @@
 <p>No bookings at the moment.</p>
 {% endif %}
 
-<a href="/buy" class="btn btn-success mt-3">Buy Service</a>
 
 <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
     <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">

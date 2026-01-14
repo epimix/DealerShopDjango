@@ -10,7 +10,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cars/',include('cars.urls')),
     path('favorites/',include('favorites.urls')),
+    path('bought/', include('BoughtCars.urls')),
 ]
 
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
