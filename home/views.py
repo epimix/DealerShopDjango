@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from cars.models import Car
 from favorites.favorites import get_favorites_cars
 from django.shortcuts import redirect,render
+from BoughtCars.bought import add_car_to_bought
 
 from cars.models import Car, BuyingRequest
 # Create your views here.
@@ -19,4 +20,6 @@ def buy_service(request, car_id):
         car=car,
         customer_name="customer"
     )
+    # Add car to bought cars session
+    add_car_to_bought(request, car_id)
     return redirect('home')

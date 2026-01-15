@@ -10,13 +10,13 @@
     </div>
 </div>
 
-{% if buying_requests %}
+{% if cars %}
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {% for request in buying_requests %}
+    {% for car in cars %}
     <div
         class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-        {% if request.car.photo %}
-        <img src="{{ request.car.photo.url }}" alt="{{ request.car.brand }} {{ request.car.model }}" class="w-full h-48 object-cover">
+        {% if car.photo %}
+        <img src="{{ car.photo.url }}" alt="{{ car.brand }} {{ car.model }}" class="w-full h-48 object-cover">
         {% else %}
         <div class="w-full h-48 bg-slate-100 flex items-center justify-center">
             <i class="fas fa-car text-4xl text-slate-400"></i>
@@ -24,21 +24,17 @@
         {% endif %}
         <div class="p-4">
             <h3 class="text-lg font-semibold text-slate-900 mb-2">
-                {{ request.car.year }} {{ request.car.brand }} {{ request.car.model }}
+                {{ car.year }} {{ car.brand }} {{ car.model }}
             </h3>
             <div class="flex items-center justify-between text-sm text-slate-600 mb-4">
-                <span><i class="fas fa-tag mr-1"></i>{{ request.car.get_type_display }}</span>
-                <span><i class="fas fa-dollar-sign mr-1"></i>{{ request.car.price|floatformat:0 }}</span>
+                <span><i class="fas fa-tag mr-1"></i>{{ car.get_type_display }}</span>
+                <span><i class="fas fa-dollar-sign mr-1"></i>${{ car.price|floatformat:0 }}</span>
             </div>
             <div class="flex gap-2">
-                <a href="{% url 'car_detail' request.car.id %}"
+                <a href="/cars/{{ car.id }}/"
                     class="flex-1 text-center rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-100">
                     View Details
                 </a>
-                <!-- <a href="{% url 'favorites:remove_car' car.id 'favorites:index' %}"
-                    class="rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm font-semibold text-red-700 hover:bg-red-100">
-                    <i class="fas fa-heart"></i>
-                </a> -->
             </div>
         </div>
     </div>

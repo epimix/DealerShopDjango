@@ -47,8 +47,8 @@
 
     <!-- Car Slider -->
     <div class="relative">
-        <div class="overflow-x-hidden -mx-4 px-4">
-            <div id="car-slider" class="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar ease-in-out gap-6"
+        <div class="overflow-hidden -mx-4 px-4">
+            <div id="car-slider" class="flex transition-transform duration-500 ease-in-out gap-6"
                 style="will-change: transform;">
                 {% for car in cars %}
                 <div class="group relative flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 xl:w-1/4">
@@ -144,41 +144,87 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', function () {
         const slider = document.getElementById('car-slider');
-        const prev = document.getElementById('slider-prev');
-        const next = document.getElementById('slider-next');
+        const prevBtn = document.getElementById('slider-prev');
+        const nextBtn = document.getElementById('slider-next');
 
-        if (!slider || !prev || !next) return;
+        if (!slider) return;
+        if (!prevBtn || !nextBtn) {
+            return;
+        }
 
-        const getScrollAmount = () => {
-            const item = slider.children[0];
-            if (!item) return 0;
-            const gap = parseInt(getComputedStyle(slider).gap || 24);
-            return item.offsetWidth + gap;
-        };
+        function getItemsPerView() {
+            return window.innerWidth >= 1280 ? 4 : window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+        }
 
-        prev.addEventListener('click', () => {
-            slider.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+        let currentIndex = 0;
+        const totalItems = slider.children.length;
+
+        function updateSlider() {
+            const itemsPerView = getItemsPerView();
+            const maxIndex = Math.max(0, totalItems - itemsPerView);
+
+            if (currentIndex > maxIndex) {
+                currentIndex = maxIndex;
+            }
+
+            if (slider.children.length > 0) {
+                const firstItem = slider.children[0];
+                const itemWidth = firstItem.offsetWidth;
+                const gap = 24;
+                const translateX = -(currentIndex * (itemWidth + gap));
+                slider.style.transform = `translateX(${translateX}px)`;
+            }
+
+            if (totalItems <= itemsPerView) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = currentIndex === 0 ? 'none' : 'flex';
+                nextBtn.style.display = currentIndex >= maxIndex ? 'none' : 'flex';
+            }
+        }
+
+        prevBtn.addEventListener('click', () => {
+            const itemsPerView = getItemsPerView();
+            const maxIndex = Math.max(0, totalItems - itemsPerView);
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
         });
 
-        next.addEventListener('click', () => {
-            slider.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+        nextBtn.addEventListener('click', () => {
+            const itemsPerView = getItemsPerView();
+            const maxIndex = Math.max(0, totalItems - itemsPerView);
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const itemsPerView = getItemsPerView();
+                const maxIndex = Math.max(0, totalItems - itemsPerView);
+                if (currentIndex > maxIndex) {
+                    currentIndex = maxIndex;
+                }
+                updateSlider();
+            }, 250);
+        });
+
+        updateSlider();
+
+        window.addEventListener('load', () => {
+            setTimeout(() => updateSlider(), 100);
         });
     });
 </script>
 
-{% endif %}
-
-{% if buying_requests %}
-<h2 class="text-lg font-bold text-slate-900">Current Buyings</h2>
-<ul>
-  {% for request in buying_requests %}
-  <li>{{ request.customer_name }} has requested to buy {{ request.car }}.</li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No bookings at the moment.</p>
 {% endif %}
 
 
