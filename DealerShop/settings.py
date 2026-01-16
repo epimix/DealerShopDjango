@@ -31,6 +31,9 @@ INSTALLED_APPS = [
     'home',
     'storages',
     'BoughtCars',
+    'rest_framework',
+    'api',
+
 ]
 
 MIDDLEWARE = [
