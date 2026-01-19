@@ -8,9 +8,31 @@
             <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">
                 Welcome to DealerShop
             </h1>
-            <p class="text-xl text-blue-100 mb-8">
-                #тут буде фільтрація і сортування
-            </p>
+            <p class="text-xl text-blue-100 mb-8">#sort</p>
+            <!-- Sorting Section -->
+            <form method="get" class="mb-6 flex items-center gap-4">
+                <label for="sort_by" class="text-white font-semibold">Sort by:</label>
+                <select name="sort_by" id="sort_by" class="rounded-lg px-3 py-2 text-blue-800">
+                    <option value="price" {% if request.GET.sort_by == "price" %}selected{% endif %}>Price</option>
+                    <option value="year" {% if request.GET.sort_by == "year" %}selected{% endif %}>Year</option>
+                    <option value="brand" {% if request.GET.sort_by == "brand" %}selected{% endif %}>Brand</option>
+                    <option value="model" {% if request.GET.sort_by == "model" %}selected{% endif %}>Model</option>
+                </select>
+                <select name="order" id="order" class="rounded-lg px-3 py-2 text-blue-800">
+                    <option value="asc" {% if request.GET.order == "asc" %}selected{% endif %}>low to high</option>
+                    <option value="desc" {% if request.GET.order == "desc" %}selected{% endif %}>high to low</option>
+                </select>
+                <button type="submit" class="rounded-lg bg-white px-4 py-2 text-blue-600 font-semibold hover:bg-blue-50 shadow-sm">
+                    Sort
+                </button>
+            </form>
+            {% if request.GET.sort_by %}
+            <script>
+                window.onload = function() {
+                    location.hash = "#cars";
+                }
+            </script>
+            {% endif %}
             <div class="flex flex-wrap gap-4">
                 <a href="#cars"
                     class="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-blue-600 hover:bg-blue-50 shadow-sm">

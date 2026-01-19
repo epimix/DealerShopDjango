@@ -17,6 +17,24 @@ from favorites.favorites import get_count_of_favorites_cars, get_favorites_cars
 
 def car_index(request):
     cars = Car.objects.all()
+
+    sort_by = request.GET.get("sort_by")
+    order = request.GET.get("order")
+
+    allowed_sorts = {
+        "price": "price",
+        "year": "year",
+        "brand": "brand",
+        "model": "model",
+
+    }
+
+    if sort_by in allowed_sorts:
+        if order == "desc":
+            cars = cars.order_by("-" + allowed_sorts[sort_by])
+        else:   
+            cars = cars.order_by(allowed_sorts[sort_by])
+
     return render(request, "cars/index.html", {"cars": cars, "fav_count": get_count_of_favorites_cars(request), "fav_cars": get_favorites_cars(request)})
 
 def carsList(request):
@@ -63,3 +81,5 @@ def editCar(request, car_id):
         form = CarForm(instance=car)
 
     return render(request, "cars/edit.html", {"form": form, "car": car})
+    
+
