@@ -12,20 +12,13 @@ from cars.models import Car
 
 class CarList(APIView):
 
-    @action(detail=False, methods=['get'])
+    @action(methods=['get'], detail=False)
     def get(self, request, format=None):
         cars = Car.objects.all()
         serializer = CarSerializer(cars, many=True)
         return Response(serializer.data)
 
-class CarDetail(APIView):
-
-    def get(self, request, pk, format=None):
-        car = self.get_object(pk)
-        serializer = CarSerializer(car)
-        return Response(serializer.data)
-    
-    @action(detail=False, methods=['post'])
+    @action(methods=['post'], detail=False)
     def post(self, request, format=None):
         serializer = CarSerializer(data=request.data)
         if serializer.is_valid():
@@ -34,20 +27,19 @@ class CarDetail(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CarDetail(APIView):
-
     def get_object(self, pk):
         try:
             return Car.objects.get(pk=pk)
         except Car.DoesNotExist:
             raise Http404
-
-    @action(detail=False, methods=['get'])
+        
+    @action(methods=['get'], detail=False)
     def get(self, request, pk, format=None):
         car = self.get_object(pk)
         serializer = CarSerializer(car)
         return Response(serializer.data)
     
-    @action(detail=False, methods=['put'])
+    @action(methods=['put'], detail=False)
     def put(self, request, pk, format=None):
         car = self.get_object(pk)
         serializer = CarSerializer(car, data=request.data)
@@ -55,22 +47,9 @@ class CarDetail(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    @action(detail=False, methods=['delete'])
+
+    @action(methods=['delete'], detail=False)
     def delete(self, request, pk, format=None):
         car = self.get_object(pk)
         car.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-    # def put(self, request, pk, format=None):
-    #     car = self.get_object(pk)
-    #     serializer = CarSerializer(car, data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    # def delete(self, request, pk, format=None):
-    #     car = self.get_object(pk)
-    #     car.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
