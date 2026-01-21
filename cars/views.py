@@ -16,8 +16,12 @@ from favorites.favorites import get_count_of_favorites_cars, get_favorites_cars
 
 
 def car_index(request):
-    cars = Car.objects.all()
-
+    text = request.GET.get("text", "")
+    if text:
+        cars = Car.objects.filter(brand__icontains=text)
+    else:
+        cars = Car.objects.all()
+        
     sort_by = request.GET.get("sort_by")
     order = request.GET.get("order")
 
