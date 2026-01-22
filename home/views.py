@@ -5,7 +5,7 @@ from django.shortcuts import redirect,render
 from BoughtCars.bought import add_car_to_bought
 
 from cars.models import Car, BuyingRequest
-# Create your views here.
+
 def home(request):
     cars = Car.objects.all()[:8]
     fav_cars = get_favorites_cars(request)
@@ -20,6 +20,19 @@ def buy_service(request, car_id):
         car=car,
         customer_name="customer"
     )
-    # Add car to bought cars session
     add_car_to_bought(request, car_id)
     return redirect('home')
+
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})
